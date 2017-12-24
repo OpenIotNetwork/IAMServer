@@ -9,7 +9,8 @@ services:
             - MYSQL_DATABASE=openiot
             - MYSQL_USER=openiot
             - MYSQL_PASSWORD=openiot
-            - KEYCLOAK_LOGLEVEL=DEBUG jboss/keycloak
+            - MYSQL_PORT_3306_TCP_ADDR=keycloak-mysql
+            - MYSQL_PORT_3306_TCP_PORT=3306
         ports:
             - 8181:8080
         volumes:
@@ -17,7 +18,3 @@ services:
             - ./keycloak-server/cli-scripts:/cli-scripts
             - ./keycloak-server/drop-ins:/drop-ins
         restart: unless-stopped
-    keycloak-mysql:
-        extends:
-          file: keycloak-mysql.yml
-          service: keycloak-mysql
