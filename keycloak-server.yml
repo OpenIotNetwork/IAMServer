@@ -1,0 +1,23 @@
+version: '2'
+services:
+    keycloak-server:
+        container_name: keycloak-server
+        image: jboss/keycloak
+        external_links:
+            - keycloak-mysql:mysql
+        environment:
+            - MYSQL_DATABASE=openiot
+            - MYSQL_USER=openiot
+            - MYSQL_PASSWORD=openiot
+            - KEYCLOAK_LOGLEVEL=DEBUG jboss/keycloak
+        ports:
+            - 8181:8080
+        volumes:
+            - ./keycloak-server/user/keycloak-add-user.json:/opt/jboss/keycloak/standalone/configuration/keycloak-add-user.json
+            - ./keycloak-server/cli-scripts:/cli-scripts
+            - ./keycloak-server/drop-ins:/drop-ins
+        restart: unless-stopped
+    keycloak-mysql:
+        extends:
+          file: keycloak-mysql.yml
+          service: keycloak-mysql

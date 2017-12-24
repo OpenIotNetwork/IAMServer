@@ -1,0 +1,20 @@
+version: '2'
+services:
+    keycloak-server:
+      extends:
+        file: keycloak-server.yml
+        service: keycloak-server
+      links:
+        - keycloak-mailcatcher:mailcatcher
+      external_links:
+        - keycloak-mysql:mysql
+      volumes:
+        - ./keycloak-server:/keycloak-server
+    keycloak-mysql:
+      extends:
+        file: keycloak-mysql.yml
+        service: keycloak-mysql
+    keycloak-mailcatcher:
+      image: schickling/mailcatcher
+      ports:
+        - 1080:1080
