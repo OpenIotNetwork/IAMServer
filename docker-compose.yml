@@ -28,3 +28,10 @@ services:
       volumes:
         - "/persistence/mysqldb:/var/lib/mysql"
       command: echo Persistence for MySql
+    keycloak-nginx:
+      extends:
+        file: keycloak-nginx.yml
+        service: keycloak-nginx
+      external_links:
+        - keycloak-server:keycloak
+
