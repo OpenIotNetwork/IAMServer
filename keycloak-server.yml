@@ -1,4 +1,17 @@
-version: '2'
+version: '2'keycloak-mysql:
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: openiot
+      MYSQL_DATABASE: openiot
+    volumes_from:
+      - mysqldata
+  mysqldata:
+    image: ubuntu
+    volumes:
+      - "/persistence/mysqldb:/var/lib/mysql"
+    command: echo Persistence for MySql
 services:
     keycloak-server:
         container_name: keycloak-server
@@ -18,6 +31,16 @@ services:
             - ./keycloak-server/drop-ins:/drop-ins
         restart: unless-stopped
     keycloak-mysql:
-        extends:
-          file: keycloak-mysql.yml
-          service: keycloak-mysql
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: openiot
+      MYSQL_DATABASE: openiot
+    volumes_from:
+      - mysqldata
+  mysqldata:
+    image: ubuntu
+    volumes:
+      - "/persistence/mysqldb:/var/lib/mysql"
+    command: echo Persistence for MySql
