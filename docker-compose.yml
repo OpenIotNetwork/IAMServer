@@ -21,6 +21,8 @@ services:
       environment:
         MYSQL_ROOT_PASSWORD: openiot
         MYSQL_DATABASE: openiot
+        MYSQL_PASSWORD: openiot
+        MYSQL_USER: openiot 
       volumes_from:
         - mysqldata
     mysqldata:
