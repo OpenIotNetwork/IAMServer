@@ -17,14 +17,14 @@ This is `docker-compose` setup for [Keycloak](http://www.keycloak.org/) server c
 
  * Clone this repository and run `docker-compose up`
  * In separate shell, run `./add-cert-to-java-truststore.sh`. Fix script for your local java setup, idea is to put custom (self-signed) certificate into java `cacerts`
- * Add to your `/etc/hosts` file record for `identity.keycloak.tom` referencing `127.0.0.1`
-   * `127.0.0.1	identity.keycloak.tom`
+ * Add to your `/etc/hosts` file record for `identity.keycloak.openiot` referencing `127.0.0.1`
+   * `127.0.0.1	identity.keycloak.openiot`
 
 
 ## Testing
 
- * point your browser to [https://identity.keycloak.tom](https://identity.keycloak.tom)
- * accept insecure site, or add ./keycloak-nginx/certs/identity.keycloak.tom.cert to browser's truststore
+ * point your browser to [https://identity.keycloak.openiot](https://identity.keycloak.openiot)
+ * accept insecure site, or add ./keycloak-nginx/certs/identity.keycloak.openiot.cert to browser's truststore
 
 ## Admin account
  * default admin account added to Keycloak is:
@@ -39,3 +39,5 @@ This is `docker-compose` setup for [Keycloak](http://www.keycloak.org/) server c
      * This modification tells Keycloak to pull the client’s IP address from the X-Forwarded-For header since it's behind nginx.
    * line 412: ```<host name="default-host" alias="localhost" default-web-module="keycloak-server.war">```
      * This modification deploys Keycloak as default application on root path (context)
+
+### Read more about http://www.keycloak.org/docs/2.5/server_installation/topics/network/https.html
